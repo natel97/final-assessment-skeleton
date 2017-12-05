@@ -37,6 +37,8 @@ const entry = {
     // Promises and Proxies
     'babel-polyfill',
 
+    'ngmap',
+
     // the path to our entry script
     path.resolve(
       // the directory this (as in, the one you're reading)
