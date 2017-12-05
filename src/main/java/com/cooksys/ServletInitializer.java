@@ -1,9 +1,8 @@
 package com.cooksys;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
 
-public class ServletInitializer extends SpringBootServletInitializer {
+public class ServletInitializer extends org.springframework.boot.web.support.SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

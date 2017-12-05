@@ -1,0 +1,8 @@
+<h1>All Flights(index)</h1>
+<input ng-change="flightIndex.filterFlights()" type="text" ng-model="from" placeholder="Origin" />
+<input ng-change="flightIndex.filterFlights()" type="text" ng-model="to" placeholder="Destination" />
+<div ng-repeat="x in flights">
+  <flight-fragment flight=x></flight-fragment>
+</div>
+<p>
+</p>
