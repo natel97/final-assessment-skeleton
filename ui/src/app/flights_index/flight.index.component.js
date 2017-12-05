@@ -11,12 +11,13 @@ class flightIndex {
 
       $log.debug($scope.to + "   " + $scope.from)
       flightService.getAllRealFlights().then((result) => {
+        console.log(result)
         $scope.flights = result.filter(x => {
           if ($scope.from != undefined)
-            if (!x.origin.toLowerCase().startsWith($scope.from.toLowerCase()))
+            if (!x.flights[0].origin.toLowerCase().startsWith($scope.from.toLowerCase()))
               return false;
           if ($scope.to != undefined)
-            if (!x.destination.toLowerCase().startsWith($scope.to.toLowerCase()))
+            if (!x.flights[x.flights.length - 1].destination.toLowerCase().startsWith($scope.to.toLowerCase()))
               return false
           return true;
         })

@@ -3,7 +3,6 @@ package com.cooksys.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.cooksys.pojo.User;
 

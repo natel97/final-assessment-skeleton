@@ -1,3 +1,11 @@
 <p>
-  This is a flight from {{flightFragment.flight.origin}} to {{flightFragment.flight.destination}}
+  This is a flight from {{flightFragment.flight.flights[0].origin}} to {{flightFragment.flight.flights[flightFragment.flight.flights.length-1].destination}}
 </p>
+<p>
+  This flight has {{flightFragment.flight.flights.length - 1}} layovers.
+</p>
+
+<p>
+  DETAILS:::: {{flightFragment.flight.flights}}
+</p>
+<br />

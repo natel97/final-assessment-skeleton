@@ -50,11 +50,11 @@ public class FlightGenerator {
 					return;
 				possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2})));
 				result.stream().forEach(level3 -> {
-					if(!(level2.getDestination().equals(level3.getOrigin())) || level1.getDestination().equals(level3.getDestination()) || level2.getOrigin().equals(level3.getDestination()) ||  level2.getOffset() < (level1.getFlightTime() + level1.getOffset() + 1))
+					if(!(level2.getDestination().equals(level3.getOrigin())) || level1.getDestination().equals(level3.getDestination()) || level2.getOrigin().equals(level3.getDestination()) ||  level3.getOffset() < (level2.getFlightTime() + level2.getOffset() + 1))
 						return;
 					possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2, level3})));
 					result.stream().forEach(level4 -> {
-						if(!level3.getDestination().equals(level4.getOrigin()))
+						if(!level3.getDestination().equals(level4.getOrigin()) || level4.getOffset() < (level3.getFlightTime() + level3.getOffset() + 1) || level1.getOrigin().equals(level4.getDestination()))
 							return;
 						if(!(level1.getDestination().equals(level4.getDestination()) || level2.getDestination().equals(level4.getDestination()))) {
 							possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2, level3, level4})));

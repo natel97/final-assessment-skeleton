@@ -34,6 +34,16 @@ class FlightService {
       })
   }
 
+  newUser(email, password, firstName, lastName) {
+    return this.$http
+      .post(`${this.apiUrl}/user`, {
+        emailAddress: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName
+      })
+  }
+
 }
 
 

@@ -45,4 +45,8 @@ public class RealFlightEntity {
 		return this;
 	}
 
+	public long getId() {
+		return this.id;
+	}
+
 }
