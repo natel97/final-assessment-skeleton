@@ -1,32 +1,48 @@
 package com.cooksys.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.cooksys.component.FlightGenerator;
-import com.cooksys.pojo.Flight;
+import com.cooksys.entity.RealFlightEntity;
+import com.cooksys.pojo.RealFlight;
+import com.cooksys.repository.FlightRepository;
+import com.cooksys.repository.RealFlightRepository;
 
 @Service
 public class FlightService {
 
 	@Autowired
 	FlightGenerator generator;
-
-	private ArrayList<Flight> flightList = new ArrayList<>();
 	
-	public ArrayList<Flight> getDailyFlightList()
+	@Autowired
+	FlightRepository flightRepo;
+	
+	@Autowired
+	RealFlightRepository realFlights;
+
+	private ArrayList<RealFlight> flightList = new ArrayList<>();
+	
+	public List<RealFlight> getDailyFlightList()
 	{
-		return flightList;
+		return realFlights.findAll().stream().map(x -> new RealFlight(x)).collect(Collectors.toList());
 	}
 	
 	//The fixedDelay parameter determines how often a new day is generated as expressed in milliseconds
+
+	@Transactional
 	@Scheduled(fixedDelay=5000)
 	private void refreshFlights()
 	{
-		flightList = generator.generateNewFlightList();
+		flightList = generator.generateNewFlightList(flightRepo);
+		flightList.forEach(x -> realFlights.save(new RealFlightEntity(x)));
 	}
 	
 }

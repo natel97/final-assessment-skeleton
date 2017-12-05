@@ -7,18 +7,22 @@ class MapController {
   markers = []
   paths = []
 
-  constructor ($map, locations) {
+  constructor($map, locations) {
     this.$map = $map
 
     // add markers from an angular constant
-    const { memphis, nashville, knoxville } = locations
+    const {
+      memphis,
+      nashville,
+      knoxville
+    } = locations
     const markers = [memphis, nashville, knoxville]
 
     markers.forEach(marker => this.addMarker(marker))
 
     // add paths manually
     const paths = [
-      [memphis, nashville, '#CC0099'],
+      [knoxville, nashville, '#CC0099'],
       [nashville, knoxville, '#AA1100']
     ]
 
@@ -31,13 +35,16 @@ class MapController {
       })
   }
 
-  addMarker ({ latitude, longitude }) {
+  addMarker({
+    latitude,
+    longitude
+  }) {
     this.markers.push({
       position: `[${latitude}, ${longitude}]`
     })
   }
 
-  addPath (a, b, color) {
+  addPath(a, b, color) {
     this.paths.push({
       path: `[[${a.latitude}, ${a.longitude}], [${b.latitude}, ${b.longitude}]]`,
       strokeColor: color,
@@ -52,5 +59,8 @@ class MapController {
 export default {
   templateUrl,
   controller: MapController,
-  controllerAs: '$mapCtrl'
+  controllerAs: '$mapCtrl',
+  bindings: {
+    flight: "="
+  }
 }

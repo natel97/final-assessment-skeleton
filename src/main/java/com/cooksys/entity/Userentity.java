@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import com.cooksys.pojo.User;
 
 @Entity
-@Table(name = "userentity")
 public class Userentity {
 	
 	public Userentity() {}
