@@ -1,4 +1,5 @@
 import flightMap from './map/map.module'
+import flight from './flight/flight'
 import flightIndex from './flights_index/flight.index.component.js'
 import flightFragment from './flights_index/flight.fragment.js'
 import homePage from './home/home.component'
@@ -26,6 +27,7 @@ angular
   .component('loginPage', loginPage)
   .component('signupPage', signupPage)
   .component('flightIndex', flightIndex)
+  .component('flight', flight)
   .component('flightFragment', flightFragment)
   .config(routing)
   .name

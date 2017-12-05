@@ -15,6 +15,12 @@ const output = {
   path: '../src/main/resources/static/'
 }
 
+const devServer = {
+  historyApiFallback: {
+    index: 'build/index.html'
+  },
+}
+
 const extensions = [
   '',
   '.js',
@@ -57,6 +63,7 @@ module.exports = {
   devtool,
   entry,
   output,
+  devServer,
   resolve: {
     extensions
   },

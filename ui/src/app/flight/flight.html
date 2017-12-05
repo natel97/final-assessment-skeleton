@@ -1,3 +1,12 @@
-<p>
-  This is a flight from {{flightFragment.flight.origin}} to {{flightFragment.flight.destination}}
-</p>
+<h1>Flight No:  {{result.id}}</h1>
+<h3>Depart at {{result.flights[0].offset}}</h3>
+<h3>Arrive around {{result.flights[result.flights.length-1].offset + result.flights[result.flights.length-1].flightTime}}</h3>
+<div ng-repeat="x in result.flights">
+  <h2>Stop Number {{$index}}</h2>
+  <p>
+    Depart at {{x.offset}}; Flight Length: {{x.flightTime}} <br />You will be leaving from {{x.origin}} and end up in {{x.destination}}.
+  </p>
+  <br />
+</div>
+
+<flight-map result=result></flight-map>

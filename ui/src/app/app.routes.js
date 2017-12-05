@@ -27,11 +27,18 @@ export default function routing($stateProvider, $urlRouterProvider, $locationPro
     component: 'flightIndex'
   }
 
+  const flight = {
+    name: 'flight',
+    url: '/flight/{id}',
+    component: 'flight'
+  }
+
   $locationProvider.html5Mode(true)
 
   $stateProvider.state(home)
   $stateProvider.state(login)
   $stateProvider.state(signup)
+  $stateProvider.state(flight)
   $stateProvider.state(flightIndex)
 
 

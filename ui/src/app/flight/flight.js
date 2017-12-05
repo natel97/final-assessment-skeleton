@@ -1,19 +1,22 @@
-import templateUrl from './flight.fragment.html'
+import templateUrl from './flight.html'
 
 /* @ngInject */
-class flightFragment {
-  constructor($log, $state) {
+class flight {
+  constructor($log, $state, flightService, $scope) {
 
 
+    this.id = $state.params.id;
+    flightService.getAFlight(this.id)
+      .then((result) => {
+        $scope.result = result
+        flightService.currentFlight = result
+      })
 
   }
 }
 
 export default {
   templateUrl,
-  controller: flightFragment,
-  controllerAs: 'flightFragment',
-  bindings: {
-    flight: "="
-  }
+  controller: flight,
+  controllerAs: 'flight'
 }

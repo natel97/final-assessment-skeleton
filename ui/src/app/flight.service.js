@@ -44,6 +44,15 @@ class FlightService {
       })
   }
 
+  getAFlight(id) {
+    return this.$http
+      .get(`${this.apiUrl}/flights/${id}`)
+      .then(result => result.data)
+  }
+
+
+
+
 }
 
 

@@ -7,9 +7,10 @@ class MapController {
   markers = []
   paths = []
 
-  constructor($map, locations) {
+  constructor($map, locations, flightService, $scope) {
     this.$map = $map
-
+    this.flight = $scope.flight
+    console.log(this)
     // add markers from an angular constant
     const {
       memphis,
@@ -21,18 +22,40 @@ class MapController {
     markers.forEach(marker => this.addMarker(marker))
 
     // add paths manually
-    const paths = [
-      [knoxville, nashville, '#CC0099'],
-      [nashville, knoxville, '#AA1100']
-    ]
+    const colors = ['#00FFFF', '#FF0099', '#FD1C03', '#E6FB04']
+    let paths = []
+
+    let getConst = (word) => {
+      switch (word) {
+        case 'KNOXVILLE':
+          return knoxville;
+        case 'MEMPHIS':
+          return memphis;
+        case "NASHVILLE":
+          return nashville;
+        case "CHATTANOOGA":
+          return chattanooga;
+        default:
+          return null
+
+      }
+    }
+
+    this.flight.flights.forEach((x) => {
+      paths.push[getConst(x.origin), getConst(x.d), colors[Math.floor(Math.random() * 4)]]
+    })
+    // const paths = [
+    //   [knoxville, nashville, '#CC0099'],
+    //   [nashville, knoxville, '#AA1100']
+    // ]
 
     paths.forEach(args => this.addPath(...args))
 
     // add path from webservice
-    $map.getMarkerByCityName('Chattanooga')
-      .then(chattanooga => {
-        this.addPath(knoxville, chattanooga, '#FF3388')
-      })
+    // $map.getMarkerByCityName('Chattanooga')
+    //   .then(chattanooga => {
+    //     this.addPath(knoxville, chattanooga, '#FF3388')
+    //   })
   }
 
   addMarker({
@@ -59,8 +82,5 @@ class MapController {
 export default {
   templateUrl,
   controller: MapController,
-  controllerAs: '$mapCtrl',
-  bindings: {
-    flight: "="
-  }
+  controllerAs: '$mapCtrl'
 }

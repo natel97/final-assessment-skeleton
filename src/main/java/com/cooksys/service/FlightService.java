@@ -45,5 +45,9 @@ public class FlightService {
 		realFlights.findRealFlightEntityByActive(true).stream().forEach(x -> realFlights.save(x.setActive(false)));
 		flightList.forEach(x -> realFlights.save(x.setActive(true)));
 	}
+
+	public RealFlight getFlightById(Long id) {
+		return new RealFlight(realFlights.getOne(id));
+	}
 	
 }
