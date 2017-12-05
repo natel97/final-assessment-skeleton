@@ -28,11 +28,11 @@ public class FlightService {
 	@Autowired
 	RealFlightRepository realFlights;
 
-	private ArrayList<RealFlight> flightList = new ArrayList<>();
+	private ArrayList<RealFlightEntity> flightList = new ArrayList<>();
 	
 	public List<RealFlight> getDailyFlightList()
 	{
-		return realFlights.findAll().stream().map(x -> new RealFlight(x)).collect(Collectors.toList());
+		return realFlights.findRealFlightEntityByActive(true).stream().map(x -> new RealFlight(x)).collect(Collectors.toList());
 	}
 	
 	//The fixedDelay parameter determines how often a new day is generated as expressed in milliseconds
@@ -42,7 +42,8 @@ public class FlightService {
 	private void refreshFlights()
 	{
 		flightList = generator.generateNewFlightList(flightRepo);
-		flightList.forEach(x -> realFlights.save(new RealFlightEntity(x)));
+		realFlights.findRealFlightEntityByActive(true).stream().forEach(x -> realFlights.save(x.setActive(false)));
+		flightList.forEach(x -> realFlights.save(x.setActive(true)));
 	}
 	
 }

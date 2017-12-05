@@ -24,13 +24,25 @@ public class RealFlightEntity {
 
 	@ManyToMany
 	List<FlightEntity> destinations;
+	
+	private Boolean active;
 
 	public List<FlightEntity> getDestinations() {
 		return destinations;
 	}
 
-	public void setDestinations(List<FlightEntity> destinations) {
+	public RealFlightEntity setDestinations(List<FlightEntity> destinations) {
 		this.destinations = destinations;
+		return this;
+	}
+
+	public Boolean isActive() {
+		return active;
+	}
+
+	public RealFlightEntity setActive(Boolean active) {
+		this.active = active;
+		return this;
 	}
 
 }

@@ -9,18 +9,18 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import com.cooksys.entity.FlightEntity;
+import com.cooksys.entity.RealFlightEntity;
 import com.cooksys.pojo.Cities;
 import com.cooksys.pojo.Flight;
-import com.cooksys.pojo.RealFlight;
 import com.cooksys.repository.FlightRepository;
 
 @Component
 public class FlightGenerator {
 
 	@Transactional
-	public ArrayList<RealFlight> generateNewFlightList(FlightRepository flightRepo) {
+	public ArrayList<RealFlightEntity> generateNewFlightList(FlightRepository flightRepo) {
 		
-		ArrayList<Flight> result = new ArrayList<>();
+		ArrayList<FlightEntity> result = new ArrayList<>();
 
 		for (int i = 0; i < 10; i++) {
 
@@ -36,28 +36,28 @@ public class FlightGenerator {
 			int flightTime = ThreadLocalRandom.current().nextInt(1, 4);
 			int offset = ThreadLocalRandom.current().nextInt(0, 10);
 
-			Flight f = new Flight(origin, destination, flightTime, offset);
-			flightRepo.save(new FlightEntity(f));
+			FlightEntity f = new FlightEntity(new Flight(origin, destination, flightTime, offset));
+			flightRepo.save(f);
 			result.add(f);
 		}
 		
-		ArrayList<RealFlight> possibilities = new ArrayList<>();
+		ArrayList<RealFlightEntity> possibilities = new ArrayList<>();
 		
 		result.stream().forEach(level1 -> {
-			possibilities.add(new RealFlight().setFlights(Arrays.asList(new Flight[] {level1})));
+			possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1})));
 			result.stream().forEach(level2 -> {
-				if(!(level1.getDestination().equals(level2.getOrigin())))
+				if(!(level1.getDestination().equals(level2.getOrigin())) || level1.getOrigin().equals(level2.getDestination()) || level2.getOffset() < (level1.getFlightTime() + level1.getOffset() + 1))
 					return;
-				possibilities.add(new RealFlight().setFlights(Arrays.asList(new Flight[] {level1, level2})));
+				possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2})));
 				result.stream().forEach(level3 -> {
-					if(!(level2.getDestination().equals(level3.getOrigin())) || level1.getDestination().equals(level3.getDestination()))
+					if(!(level2.getDestination().equals(level3.getOrigin())) || level1.getDestination().equals(level3.getDestination()) || level2.getOrigin().equals(level3.getDestination()) ||  level2.getOffset() < (level1.getFlightTime() + level1.getOffset() + 1))
 						return;
-					possibilities.add(new RealFlight().setFlights(Arrays.asList(new Flight[] {level1, level2, level3})));
+					possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2, level3})));
 					result.stream().forEach(level4 -> {
 						if(!level3.getDestination().equals(level4.getOrigin()))
 							return;
 						if(!(level1.getDestination().equals(level4.getDestination()) || level2.getDestination().equals(level4.getDestination()))) {
-							possibilities.add(new RealFlight().setFlights(Arrays.asList(new Flight[] {level1, level2, level3, level4})));
+							possibilities.add(new RealFlightEntity().setDestinations(Arrays.asList(new FlightEntity[] {level1, level2, level3, level4})));
 						}
 					});
 				});
