@@ -6,7 +6,10 @@
 </p>
 
 <p>
+  Total Duration of flight: {{((flightFragment.flight.flights[flightFragment.flight.flights.length-1].offset + flightFragment.flight.flights[flightFragment.flight.flights.length-1].flightTime) - flightFragment.flight.flights[0].offset)}}
+</p>
+<p>
   <a ui-sref="flight({ 'id': flightFragment.flight.id })">
-    {{flightFragment.flight.id}}
+    View Details!
 </p>
 <br />

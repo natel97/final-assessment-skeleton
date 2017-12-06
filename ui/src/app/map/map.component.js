@@ -11,6 +11,8 @@ class MapController {
     this.$map = $map
     var setData = (arr) => {
       arr.forEach(x => this.addPath)
+
+
     }
     // add markers from an angular constant
     const {
@@ -19,9 +21,9 @@ class MapController {
       knoxville,
       chattanooga
     } = locations
-    const markers = [memphis, nashville, knoxville, chattanooga]
-
-    markers.forEach(marker => this.addMarker(marker))
+    // const markers = [memphis, nashville, knoxville, chattanooga]
+    //
+    // markers.forEach(marker => this.addMarker(marker))
     flightService.getAFlight($state.params.id).then((response) => {
       console.log(response)
       // add paths manually
@@ -46,16 +48,20 @@ class MapController {
         }
       }
 
+      let marks = [];
+
       response.flights.forEach((x) => {
         this.addPath(getConst(x.origin), getConst(x.destination), colors[Math.floor(Math.random() * 4)])
       })
-
-      // add path from webservice
-      // $map.getMarkerByCityName('Chattanooga')
-      //   .then(chattanooga => {
-      //     this.addPath(knoxville, chattanooga, '#FF3388')
-      //   })
+      this.addMarker(getConst(response.flights[0].origin))
+      this.addMarker(getConst(response.flights[response.flights.length - 1].destination))
     })
+
+    // add path from webservice
+    // $map.getMarkerByCityName('Chattanooga')
+    //   .then(chattanooga => {
+    //     this.addPath(knoxville, chattanooga, '#FF3388')
+    //   })
   }
 
   addMarker({

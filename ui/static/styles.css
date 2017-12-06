@@ -1,3 +1,29 @@
-h1 {
-  color: purple;
+navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: maroon;
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+}
+
+#navigation-right {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-item {
+  margin-left: 32px;
+  margin-right: 32px;
+  background-color: beige;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+}
+
+#viewport {
+  margin-top: 128px;
+  margin-left: 16px;
+  margin-right: 16px;
 }

@@ -4,5 +4,13 @@
 <div ng-repeat="x in flights">
   <flight-fragment flight=x></flight-fragment>
 </div>
+<div ng-if="flights.length === 0">
+  <p>
+    We're sorry! No flights could be found with your parameters :(
+  </p>
+  <p>
+    Please refine your search!
+  </p>
+</div>
 <p>
 </p>

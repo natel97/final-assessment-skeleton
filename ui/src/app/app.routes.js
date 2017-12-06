@@ -9,6 +9,18 @@ export default function routing($stateProvider, $urlRouterProvider, $locationPro
     component: 'homePage'
   }
 
+  const editProfile = {
+    name: 'editProfile',
+    url: '/profile',
+    component: 'editProfile'
+  }
+
+  const myFlights = {
+    name: 'myFlights',
+    url: '/myFlights',
+    component: 'myFlights'
+  }
+
   const login = {
     name: 'login',
     url: '/login',
@@ -39,6 +51,8 @@ export default function routing($stateProvider, $urlRouterProvider, $locationPro
   $stateProvider.state(login)
   $stateProvider.state(signup)
   $stateProvider.state(flight)
+  $stateProvider.state(myFlights)
+  $stateProvider.state(editProfile)
   $stateProvider.state(flightIndex)
 
 

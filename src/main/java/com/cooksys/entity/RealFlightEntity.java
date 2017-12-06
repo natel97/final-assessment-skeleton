@@ -1,6 +1,7 @@
 package com.cooksys.entity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,8 @@ public class RealFlightEntity {
 	public RealFlightEntity() {}
 	
 	public RealFlightEntity(RealFlight f) {
-		this.destinations = f.getFlightsAsEntities();
-	}
+		this.destinations = f.getFlights().stream().map(x -> new FlightEntity(x)).collect(Collectors.toList());
+		}
 
 	@Id
 	@GeneratedValue

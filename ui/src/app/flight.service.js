@@ -1,13 +1,17 @@
 class FlightService {
-  constructor($http, apiUrl) {
+  constructor($http, apiUrl, $interval) {
     this.$http = $http
     this.apiUrl = apiUrl
-  }
-
-  getAllFlights() {
-    return this.$http
-      .get(`${this.apiUrl}/location`)
-      .then(result => result.data)
+    this.currentSession = JSON.parse(window.localStorage.getItem('login'))
+    this.loggedIn = false;
+    this.nextRefreshTime = 0;
+    this.$interval = $interval
+    this.getAllFlights = () => {
+      this.getNextRefresh().then(x => this.nextRefreshTime = x)
+      return this.$http
+        .get(`${this.apiUrl}/flights`)
+        .then(result => result.data)
+    }
   }
 
   getMarkerByCityName(name) {
@@ -26,13 +30,32 @@ class FlightService {
       .then(result => result.data)
   }
 
+  setUser(email, password) {
+    this.currentSession = {
+      emailAddress: email,
+      password: password
+    }
+  }
+
   logIntoUser(email, password) {
+    this.setUser(email, password)
     return this.$http
       .post(`${this.apiUrl}/user/validate`, {
         emailAddress: email,
         password: password
+      }).then((result) => {
+        if (result) {
+          window.localStorage.setItem('login', JSON.stringify({
+            emailAddress: email,
+            password
+          }))
+          this.loggedIn = true;
+        }
+        return result
       })
   }
+
+
 
   newUser(email, password, firstName, lastName) {
     return this.$http
@@ -41,6 +64,15 @@ class FlightService {
         password: password,
         firstName: firstName,
         lastName: lastName
+      }).then((result) => {
+        if (result) {
+          window.localStorage.setItem('login', JSON.stringify({
+            emailAddress: email,
+            password
+          }))
+          this.loggedIn = true;
+        }
+        return result
       })
   }
 
@@ -50,9 +82,31 @@ class FlightService {
       .then(result => result.data)
   }
 
+  bookFlight(id) {
+    return this.$http
+      .post(`${this.apiUrl}/user/addFlight/${id}`, this.getUser())
+  }
 
+  getUser() {
+    return this.currentSession;
+  }
 
+  logOut() {
+    window.localStorage.clear('login')
+  }
+  getMyFlights() {
+    return this.$http
+      .post(`${this.apiUrl}/user/flights`, this.getUser())
+      .then(result => result.data)
+  }
 
+  getNextRefresh() {
+    return this.$http
+      .get(`${this.apiUrl}/flights/refresh`)
+      .then((result) => {
+        return result.data
+      })
+  }
 }
 
 

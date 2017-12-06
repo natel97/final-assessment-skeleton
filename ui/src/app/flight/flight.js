@@ -5,6 +5,9 @@ class flight {
   constructor($log, $state, flightService, $scope) {
 
 
+    this.bookFlight = (id) => {
+      flightService.bookFlight(id)
+    }
     this.id = $state.params.id;
     flightService.getAFlight(this.id)
       .then((result) => {
@@ -13,6 +16,7 @@ class flight {
       })
 
   }
+
 }
 
 export default {

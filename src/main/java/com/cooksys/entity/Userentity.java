@@ -1,8 +1,12 @@
 package com.cooksys.entity;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import com.cooksys.pojo.User;
 
@@ -15,6 +19,8 @@ public class Userentity {
 		this.lastName = u.getLastName();
 		this.emailAddress = u.getEmailAddress();
 		this.password = u.getPassword();
+		if(u.getFlights() != null)
+			this.flights = u.getFlights().stream().map(x -> new RealFlightEntity(x)).collect(Collectors.toList());
 	}
 	
 	@Id
@@ -25,6 +31,9 @@ public class Userentity {
 	private String lastName;
 	private String emailAddress;
 	private String password;
+	
+	@ManyToMany
+	private List<RealFlightEntity> flights;
 	
 	public long getId() {
 		return id;
@@ -55,6 +64,17 @@ public class Userentity {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public List<RealFlightEntity> getFlights() {
+		return flights;
+	}
+	public void setFlights(List<RealFlightEntity> flights) {
+		this.flights = flights;
+	}
+	
+	public Userentity addFlight(RealFlightEntity flight) {
+		this.flights.add(flight);
+		return this;
 	}
 	
 	
