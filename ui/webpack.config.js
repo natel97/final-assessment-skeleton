@@ -3,11 +3,12 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const path = require('path')
 const devtool = 'source-map'
 
 const entry = {
   vendor: './src/vendor.js',
-  main: ['babel-polyfill', './src/main.js']
+  main: ['babel-polyfill', './src/main.js', path.resolve(__dirname, 'src/main.js')]
 }
 
 const output = {
@@ -16,9 +17,7 @@ const output = {
 }
 
 const devServer = {
-  historyApiFallback: {
-    index: 'build/index.html'
-  },
+  historyApiFallback: true
 }
 
 const extensions = [

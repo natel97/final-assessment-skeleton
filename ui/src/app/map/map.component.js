@@ -7,55 +7,55 @@ class MapController {
   markers = []
   paths = []
 
-  constructor($map, locations, flightService, $scope) {
+  constructor($map, locations, flightService, $scope, $state) {
     this.$map = $map
-    this.flight = $scope.flight
-    console.log(this)
+    var setData = (arr) => {
+      arr.forEach(x => this.addPath)
+    }
     // add markers from an angular constant
     const {
       memphis,
       nashville,
-      knoxville
+      knoxville,
+      chattanooga
     } = locations
-    const markers = [memphis, nashville, knoxville]
+    const markers = [memphis, nashville, knoxville, chattanooga]
 
     markers.forEach(marker => this.addMarker(marker))
+    flightService.getAFlight($state.params.id).then((response) => {
+      console.log(response)
+      // add paths manually
+      const colors = ['#00FFFF', '#FF0099', '#FD1C03', '#E6FB04']
+      let temppaths = []
 
-    // add paths manually
-    const colors = ['#00FFFF', '#FF0099', '#FD1C03', '#E6FB04']
-    let paths = []
+      let getConst = (word) => {
+        switch (word) {
+          case 'KNOXVILLE':
+            console.log("got knoxville")
+            return knoxville;
+          case 'MEMPHIS':
+            console.log("got memphis")
+            return memphis;
+          case "NASHVILLE":
+            return nashville;
+          case "CHATTANOOGA":
+            return chattanooga;
+          default:
+            return null
 
-    let getConst = (word) => {
-      switch (word) {
-        case 'KNOXVILLE':
-          return knoxville;
-        case 'MEMPHIS':
-          return memphis;
-        case "NASHVILLE":
-          return nashville;
-        case "CHATTANOOGA":
-          return chattanooga;
-        default:
-          return null
-
+        }
       }
-    }
 
-    this.flight.flights.forEach((x) => {
-      paths.push[getConst(x.origin), getConst(x.d), colors[Math.floor(Math.random() * 4)]]
+      response.flights.forEach((x) => {
+        this.addPath(getConst(x.origin), getConst(x.destination), colors[Math.floor(Math.random() * 4)])
+      })
+
+      // add path from webservice
+      // $map.getMarkerByCityName('Chattanooga')
+      //   .then(chattanooga => {
+      //     this.addPath(knoxville, chattanooga, '#FF3388')
+      //   })
     })
-    // const paths = [
-    //   [knoxville, nashville, '#CC0099'],
-    //   [nashville, knoxville, '#AA1100']
-    // ]
-
-    paths.forEach(args => this.addPath(...args))
-
-    // add path from webservice
-    // $map.getMarkerByCityName('Chattanooga')
-    //   .then(chattanooga => {
-    //     this.addPath(knoxville, chattanooga, '#FF3388')
-    //   })
   }
 
   addMarker({
