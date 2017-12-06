@@ -3,7 +3,7 @@ class FlightService {
     this.$http = $http
     this.apiUrl = apiUrl
     this.currentSession = JSON.parse(window.localStorage.getItem('login'))
-    this.loggedIn = false;
+    this.loggedIn = (this.currentSession != undefined);
     this.nextRefreshTime = 0;
     this.$interval = $interval
     this.getAllFlights = () => {
@@ -12,6 +12,15 @@ class FlightService {
         .get(`${this.apiUrl}/flights`)
         .then(result => result.data)
     }
+  }
+
+  getUserDetails() {
+    return this.$http
+      .post(`${this.apiUrl}/user/user`, {
+        emailAddress: this.currentSession.emailAddress,
+        password: this.currentSession.password
+      })
+      .then(result => result.data)
   }
 
   getMarkerByCityName(name) {
@@ -93,6 +102,7 @@ class FlightService {
 
   logOut() {
     window.localStorage.clear('login')
+    this.loggedIn = false;
   }
   getMyFlights() {
     return this.$http

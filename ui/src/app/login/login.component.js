@@ -2,13 +2,16 @@ import templateUrl from './login.component.html'
 
 /* @ngInject */
 class login {
-  constructor($log, $state, flightService) {
-
+  constructor($log, $state, flightService, $scope) {
+    this.$scope = $scope
+    this.flightService = flightService
     this.loginToApp = () => {
       flightService.logIntoUser(this.email, this.password).then((result) => {
-        if (result.data == true)
+        if (result.data == true) {
+          this.flightService.loggedIn = true;
+          this.flightService.loggedIn = true;
           $state.go("flightIndex");
-        else {
+        } else {
           alert("Incorrect Login Information")
         }
       }).catch(() => {

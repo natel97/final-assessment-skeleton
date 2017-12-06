@@ -1,18 +1,18 @@
 <div id="navigation-left">
-  <p class="nav-item">
-    {{loggedIn ? "View Flights" : "Home"}}
+  <p ng-click="navigation.button1()" class="nav-item">
+    {{navigation.flightService.loggedIn ? "View Flights" : "Home"}}
   </p>
 </div>
 <div>
   <p>
-    {{loggedIn ? "Welcome back!" : "Sign in to check out our flights"}}
+    {{navigation.flightService.loggedIn ? "Welcome back!" : "Sign in to check out our flights"}}
   </p>
 </div>
 <div id="navigation-right">
-  <p class="nav-item">
-    {{loggedIn ? "Profile" : "Sign Up"}}
+  <p ng-click="navigation.button2()" class="nav-item">
+    {{navigation.flightService.loggedIn ? "Profile" : "Sign Up"}}
   </p>
-  <p class="nav-item">
-    {{loggedIn ? "Log Out" : "Log In"}}
+  <p ng-click="navigation.button3()" class="nav-item">
+    {{navigation.flightService.loggedIn ? "Log Out" : "Log In"}}
   </p>
 </div>
