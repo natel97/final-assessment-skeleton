@@ -6,9 +6,11 @@ class flight {
 
     if (!flightService.loggedIn)
       $state.go('home')
-
+    this.$state = $state
     this.bookFlight = (id) => {
-      flightService.bookFlight(id)
+      flightService.bookFlight(id).then((result) => {
+        flightService.newMessage("Time to fly!", result.data ? "Successfully booked flight!" : "You have already booked this flight!", () => this.$state.go('flights'))
+      })
     }
     this.id = $state.params.id;
     flightService.getAFlight(this.id)

@@ -1,17 +1,35 @@
 class FlightService {
-  constructor($http, apiUrl, $interval) {
+  constructor($http, apiUrl, $interval, $rootScope) {
     this.$http = $http
+    this.$scope = $rootScope;
     this.apiUrl = apiUrl
     this.currentSession = JSON.parse(window.localStorage.getItem('login'))
     this.loggedIn = (this.currentSession != undefined);
     this.nextRefreshTime = 0;
     this.$interval = $interval
+    this.$scope.messageVisible = false;
+    this.messageVisible = false;
+    this.message = "Test"
+    this.contents = "This is a test"
+
     this.getAllFlights = () => {
       this.getNextRefresh().then(x => this.nextRefreshTime = x)
       return this.$http
         .get(`${this.apiUrl}/flights`)
         .then(result => result.data)
     }
+  }
+
+  newMessage(message, contents, callback) {
+    this.message = message
+    this.contents = contents
+    this.$scope.messageVisible = true;
+    this.messageVisible = true;
+  }
+
+  hideBox() {
+    this.messageVisible = false;
+    this.$scope.messageVisible = false;
   }
 
   getUserDetails() {

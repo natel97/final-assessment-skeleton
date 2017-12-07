@@ -4,6 +4,7 @@ import myFlights from './MyFlights/myFlights'
 import editProfile from './editProfile/editProfile'
 import flight from './flight/flight'
 import flightIndex from './flights_index/flight.index.component.js'
+import dialogBox from './dialogBox/box.component'
 import flightFragment from './flights_index/flight.fragment.js'
 import homePage from './home/home.component'
 import aFlight from './MyFlights/a_flight'
@@ -32,6 +33,7 @@ angular
   .component('signupPage', signupPage)
   .component('flightIndex', flightIndex)
   .component('flight', flight)
+  .component('dialogBox', dialogBox)
   .component('flightFragment', flightFragment)
   .component('editProfile', editProfile)
   .component('myFlights', myFlights)

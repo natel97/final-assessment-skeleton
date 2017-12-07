@@ -14,10 +14,10 @@ class login {
           this.flightService.loggedIn = true;
           $state.go("flightIndex");
         } else {
-          alert("Incorrect Login Information")
+          this.flightService.newMessage("Incorrect Login Information", "A user exists, however the password is incorrect!")
         }
       }).catch(() => {
-        alert("The user does not exist! Create an account!")
+        this.flightService.newMessage("404", "The user does not exist! Create an account!")
       })
 
     }

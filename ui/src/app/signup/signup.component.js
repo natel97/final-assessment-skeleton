@@ -4,6 +4,7 @@ import templateUrl from './signup.component.html'
 class signup {
   constructor($log, $state, flightService, $scope) {
 
+    flightService.newMessage("Hello", "World")
     if (flightService.loggedIn)
       $state.go('flightIndex')
     this.$scope = $scope
@@ -12,8 +13,10 @@ class signup {
       flightService.newUser(this.email, this.password, this.firstName, this.lastName)
         .then((response) => {
           if (response.data == true) {
+            this.flightService.newMessage("Welcome", "Welcome to our flights!", () => {
+              $state.go("flightIndex")
+            })
             this.flightService.loggedIn = true;
-            $state.go("flightIndex")
           }
         })
     }

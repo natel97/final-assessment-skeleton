@@ -25,10 +25,9 @@ class flightIndex {
         $state.go('flights')
       if (flightService.nextRefreshTime < Date.now())
         flightService.getAllFlights().then((result) => {
-          console.log("Data refreshed!")
+          console.log("Data refreshed!" + " Next refresh scheduled by server at " + new Date(flightService.nextRefreshTime) + ":: Milliseconds => " + new Date(flightService.nextRefreshTime).getMilliseconds())
           $scope.allFlights = result;
           $scope.filterFlights()
-          console.log(result)
         })
     }, 300);
 

@@ -3,7 +3,6 @@ import templateUrl from './editProfile.html'
 /* @ngInject */
 class editProfile {
   constructor($log, $state, flightService, $scope) {
-
     if (!flightService.loggedIn)
       $state.go('home')
     this.$scope = $scope

@@ -25,7 +25,6 @@ class MapController {
     //
     // markers.forEach(marker => this.addMarker(marker))
     flightService.getAFlight($state.params.id).then((response) => {
-      console.log(response)
       // add paths manually
       const colors = ['#00FFFF', '#FF0099', '#FD1C03', '#E6FB04']
       let temppaths = []
@@ -33,10 +32,8 @@ class MapController {
       let getConst = (word) => {
         switch (word) {
           case 'KNOXVILLE':
-            console.log("got knoxville")
             return knoxville;
           case 'MEMPHIS':
-            console.log("got memphis")
             return memphis;
           case "NASHVILLE":
             return nashville;
