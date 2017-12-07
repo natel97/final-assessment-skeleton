@@ -151,6 +151,7 @@ signup-page {}
   border-radius: 10px;
   user-select: none;
   border: 1px solid black;
+  transition: top 2s;
 }
 
 #box-contents {

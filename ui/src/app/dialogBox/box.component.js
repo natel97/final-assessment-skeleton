@@ -7,7 +7,10 @@ class box {
     this.$log = $log
 
   }
+
 }
+
+
 
 export default {
   templateUrl,
