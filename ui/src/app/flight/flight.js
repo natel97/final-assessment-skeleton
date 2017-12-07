@@ -15,6 +15,7 @@ class flight {
     this.id = $state.params.id;
     flightService.getAFlight(this.id)
       .then((result) => {
+        console.log(result)
         $scope.result = result
         flightService.currentFlight = result
       })

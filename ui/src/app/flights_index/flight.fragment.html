@@ -6,7 +6,7 @@
 </p>
 
 <p id="duration">
-  Total Duration of flight: {{((flightFragment.flight.flights[flightFragment.flight.flights.length-1].offset + flightFragment.flight.flights[flightFragment.flight.flights.length-1].flightTime) - flightFragment.flight.flights[0].offset)}}
+  Total Duration of flight: {{((flightFragment.flight.flights[flightFragment.flight.flights.length-1].offset + flightFragment.flight.flights[flightFragment.flight.flights.length-1].flightTime) - flightFragment.flight.flights[0].offset) + " hours"}}
 </p>
 <p class="general-button">
   <a ui-sref="flight({ 'id': flightFragment.flight.id })">

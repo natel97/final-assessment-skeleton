@@ -1,15 +1,15 @@
 <h1 id="flight-no">Flight No:  {{result.id}}</h1>
-<h3 id="departure">Depart at {{result.flights[0].offset}}</h3>
-<h3 id="arrival">Arrive around {{result.flights[result.flights.length-1].offset + result.flights[result.flights.length-1].flightTime}}</h3>
+<h3 id="departure">Depart at {{result.flights[0].departureTime}}</h3>
+<h3 id="arrival">Arrive around {{result.totalTime}}</h3>
 <div class="flight-grouping" ng-repeat="x in result.flights">
   <h2 class="stop-no">Stop Number {{$index + 1}}</h2>
   <p class="details">
-    Depart at {{x.offset}}; Flight Length: {{x.flightTime}} <br />You will be leaving from {{x.origin}} and end up in {{x.destination}}.
+    Depart at {{x.departureTime}}; Flight Length: {{x.flightTime}} hours <br />You will be leaving from {{x.origin}} and end up in {{x.destination}}.
   </p>
   <br />
   <p ng-if="$index < result.flights.length - 1 && result.flights.length > 1">
 
-    Layover: {{result.flights[$index+1].offset - (x.offset + x.flightTime)}}
+    Layover: {{result.flights[$index+1].offset - (x.offset + x.duration)}} hours
   </p>
 </div>
 

@@ -34,7 +34,7 @@ public class FlightGenerator {
 			String origin = Cities.values()[originIndex].getName();
 			String destination = Cities.values()[destinationIndex].getName();
 			int flightTime = ThreadLocalRandom.current().nextInt(1, 4);
-			int offset = ThreadLocalRandom.current().nextInt(0, 10);
+			int offset = ThreadLocalRandom.current().nextInt(0, 23);
 
 			FlightEntity f = new FlightEntity(new Flight(origin, destination, flightTime, offset));
 			flightRepo.save(f);
