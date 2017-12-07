@@ -26,4 +26,117 @@ navigation {
   margin-top: 128px;
   margin-left: 16px;
   margin-right: 16px;
+  display: flex;
 }
+
+#profile-header {}
+
+#profile-welcome {}
+
+#flight-no {}
+
+#departure {}
+
+#arrival {}
+
+#details-general {}
+
+#details-layovers {}
+
+#duration {}
+
+#flight-index-header {}
+
+#flights-in-index {
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#no-fly-for-you {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: space-around;
+  background-color: lightblue;
+  color: purple;
+  border: 1px solid pink;
+  text-align: center;
+  max-width: 400px;
+}
+
+#sorry {}
+
+#refine {}
+
+#home-header {}
+
+#login-header {}
+
+#my-flights-header {}
+
+#my-flights-collection {}
+
+#my-flights-footer {}
+
+#signup-header {}
+
+.general-button {
+  display: inline-block;
+  margin-left: 32px;
+  margin-right: 32px;
+  background-color: maroon;
+  color: white;
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  max-width: 400px;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 800;
+  color: lightgreen;
+}
+
+.flight-grouping {}
+
+.stop-no {}
+
+.details {}
+
+edit-profile {}
+
+flight {
+  display: flex;
+  align-content: space-around;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100vw;
+  text-align: center;
+}
+
+flight-index, my-flights {
+  width: 100vw;
+}
+
+flight-fragment, a-flight {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  padding: 32px;
+  border: 1px solid maroon;
+  text-align: center;
+  min-width: 256px;
+}
+
+home-page {}
+
+login-page {}
+
+signup-page {}

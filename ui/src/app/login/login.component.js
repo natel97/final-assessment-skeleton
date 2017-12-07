@@ -3,6 +3,8 @@ import templateUrl from './login.component.html'
 /* @ngInject */
 class login {
   constructor($log, $state, flightService, $scope) {
+    if (flightService.loggedIn)
+      $state.go('flightIndex')
     this.$scope = $scope
     this.flightService = flightService
     this.loginToApp = () => {

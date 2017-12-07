@@ -5,6 +5,8 @@ import flightService from '../flight.service'
 class flightIndex {
   constructor($log, $state, flightService, $scope, $interval) {
     this.$interval = $interval
+    if (!flightService.loggedIn)
+      $state.go('home')
     $scope.filterFlights = () => {
       $scope.flights = $scope.allFlights.filter(x => {
         if ($scope.from != undefined)

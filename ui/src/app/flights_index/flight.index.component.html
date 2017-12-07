@@ -1,14 +1,14 @@
 <h1 id="flight-index-header">All Flights(index)</h1>
 <input ng-change="filterFlights()" type="text" ng-model="from" placeholder="Origin" />
 <input ng-change="filterFlights()" type="text" ng-model="to" placeholder="Destination" />
-<div>
+<div id='flights-in-index'>
   <flight-fragment ng-repeat="x in flights" flight=x></flight-fragment>
 </div>
-<div ng-if="flights.length === 0">
-  <p>
+<div id="no-fly-for-you" ng-if="flights.length === 0">
+  <p id="sorry">
     We're sorry! No flights could be found with your parameters :(
   </p>
-  <p>
+  <p id="refine">
     Please refine your search!
   </p>
 </div>

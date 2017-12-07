@@ -4,6 +4,8 @@ import templateUrl from './flight.html'
 class flight {
   constructor($log, $state, flightService, $scope) {
 
+    if (!flightService.loggedIn)
+      $state.go('home')
 
     this.bookFlight = (id) => {
       flightService.bookFlight(id)
