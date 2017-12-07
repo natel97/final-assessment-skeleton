@@ -2,7 +2,7 @@ import templateUrl from './a_flight.html'
 
 /* @ngInject */
 class aFlight {
-  constructor($log, $state, flightService) {
+  constructor($state, flightService) {
 
 
 

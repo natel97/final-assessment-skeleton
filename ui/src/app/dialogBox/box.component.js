@@ -2,10 +2,8 @@ import templateUrl from './box.html'
 
 /* @ngInject */
 class box {
-  constructor($scope, $log, flightService) {
+  constructor($scope, flightService) {
     this.flightService = flightService
-    this.$log = $log
-
   }
 
 }

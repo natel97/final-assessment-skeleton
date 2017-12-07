@@ -2,7 +2,7 @@ import templateUrl from './navigation.html'
 
 /* @ngInject */
 class navigation {
-  constructor($log, $state, flightService, $scope) {
+  constructor($state, flightService, $scope) {
     this.flightService = flightService
     this.$scope = $scope
     this.$state = $state

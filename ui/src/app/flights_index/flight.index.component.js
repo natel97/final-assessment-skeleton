@@ -3,7 +3,7 @@ import flightService from '../flight.service'
 
 /* @ngInject */
 class flightIndex {
-  constructor($log, $state, flightService, $scope, $interval) {
+  constructor($state, flightService, $scope, $interval) {
     this.$interval = $interval
     if (!flightService.loggedIn)
       $state.go('home')

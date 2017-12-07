@@ -107,14 +107,12 @@ class FlightService {
     return this.$http
       .get(`${this.apiUrl}/flights/${id}`)
       .then((result) => {
-        console.log(result)
         result.data.flights.map(x => {
           x.departureTime = x.offset % 24 == 0 ? "Midnight! (woah, scary!)" : x.offset % 12 == 0 ? "12 Noon" : x.offset > 24 ? x.offset - 24 + " AM (Next day)" : window.Math.floor(x.offset / 12) == 0 ?
             (x.offset) + " AM" : (x.offset - 12) + " PM"
           return x;
         })
         let num = result.data.flights[result.data.flights.length - 1].offset + result.data.flights[result.data.flights.length - 1].flightTime
-        console.log(num)
 
         result.data.totalTime = num % 24 == 0 ? "Midnight! (woah, scary!)" : num % 12 == 0 ? "12 Noon" : num > 24 ? num - 24 + " AM (Next day)" : window.Math.floor(num / 12) == 0 ? (num) + " AM" : (num - 12) + " PM"
         return result.data;

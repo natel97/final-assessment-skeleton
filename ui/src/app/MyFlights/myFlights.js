@@ -2,7 +2,7 @@ import templateUrl from './myFlights.html'
 
 /* @ngInject */
 class myFlights {
-  constructor($log, $state, flightService, $scope) {
+  constructor($state, flightService, $scope) {
 
     if (!flightService.loggedIn)
       $state.go('home')

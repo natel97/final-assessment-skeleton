@@ -2,8 +2,7 @@ import templateUrl from './app.component.html'
 import '../../static/styles.css'
 /* @ngInject */
 class AppController {
-  constructor($log, $state, flightService, $rootScope) {
-    $log.debug('AppController is a go.')
+  constructor($state, flightService, $rootScope) {
     this.$rootScope = $rootScope
   }
 }

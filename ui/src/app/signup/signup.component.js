@@ -2,13 +2,12 @@ import templateUrl from './signup.component.html'
 
 /* @ngInject */
 class signup {
-  constructor($log, $state, flightService, $scope) {
+  constructor($state, flightService, $scope) {
 
     this.email = ""
     this.password = ""
     this.firstName = ""
     this.lastName = ""
-    flightService.newMessage("Hello", "World")
     if (flightService.loggedIn)
       $state.go('flightIndex')
     this.$scope = $scope
